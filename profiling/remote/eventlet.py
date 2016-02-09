@@ -25,16 +25,11 @@ __all__ = ['EventletProfilingServer']
 
 
 class StreamServer(object):
-    def __init__(self, listen_info, handle=None, backlog=None,
+    def __init__(self, server, handle=None, backlog=None,
                  spawn='default', **ssl_args):
         assert backlog is None
         assert spawn == 'default'
-
-        if ':' in listen_info[0]:
-            self.server = eventlet.listen(listen_info,
-                                          family=socket.AF_INET6)
-        else:
-            self.server = eventlet.listen(listen_info)
+        self.server = server
 
         if ssl_args:
             def wrap_and_handle(sock, addr):
