@@ -84,7 +84,7 @@ class wrap_errors(object):
         func = self.func
         try:
             return func(*args, **kwargs)
-        except self.errors, ex:
+        except self.errors as ex:
             return ex
 
     def __str__(self):
